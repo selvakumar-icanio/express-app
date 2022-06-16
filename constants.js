@@ -50,6 +50,8 @@ const DB_CONFIG = {
 
 const TABLE_NAME = {
   book : "Book",
+  author : "Author",
+  bookAuthor : "Book_Author"
 }
 
 module.exports = { PORT, END_POINT, QUERY, DB_CONFIG, TABLE_NAME };

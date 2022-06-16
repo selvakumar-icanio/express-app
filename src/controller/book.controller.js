@@ -1,3 +1,5 @@
+const authorDao = require("../dao/author.dao");
+const bookAuthorDao = require("../dao/book-author.dao");
 const bookDao = require("../dao/book.dao");
 
 /**
@@ -12,9 +14,19 @@ var bookController = {
 };
 
 function addBook(req, res) {
+  const { name, price, author } = req.body;
+  console.log(author, "|||||||||||||");
+  let reqBody = { name: name, price: price };
   bookDao
-    .create(req.body)
+    .create(reqBody)
     .then((data) => {
+      author.map(el=>{
+        bookAuthorDao.create({ BookId : data.id, AuthorId : el})
+        .then(response=>{
+          console.log(response, "------------------")
+        })
+      })
+      console.log(data, "response--------------");
       res.send(data);
     })
     .catch((error) => {

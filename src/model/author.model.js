@@ -1,13 +1,12 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../../connection");
 const { TABLE_NAME } = require("../../constants");
-const Author = require("./author.model");
 
 /**
  * Defining a structure for the Book model
  */
-const Book = sequelize.define(
-  TABLE_NAME.book,
+const Author = sequelize.define(
+  TABLE_NAME.author,
   {
     id: {
       type: DataTypes.INTEGER,
@@ -18,19 +17,16 @@ const Book = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    price: {
+    age: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
   {
-    tableName: TABLE_NAME.book,
+    tableName: TABLE_NAME.author,
     timestamps: false,
     // Other model options go here
   }
 );
 
-Book.belongsToMany(Author, { through : "Book_Author", timestamps : false});
-Author.belongsToMany(Book, { through : "Book_Author", timestamps : false });
-
-module.exports = Book;
+module.exports = Author;

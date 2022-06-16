@@ -1,3 +1,5 @@
+const { sequelize } = require('../../connection');
+const Author = require('../model/author.model');
 const Book = require('../model/book.model');
 
 var bookDao = {
@@ -9,7 +11,10 @@ var bookDao = {
 }
 
 function findAll() {
-    return Book.findAll();
+    return Book.findAll({
+        attributes : ['id', 'name', 'price'],
+        include : Author,
+    });
 }
 
 function findById(id) {
@@ -28,4 +33,5 @@ function create(book) {
 function updateBook(book, id) {
     return Book.update(book, { where: { id: id } });
 }
+
 module.exports = bookDao;
